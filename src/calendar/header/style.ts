@@ -1,30 +1,42 @@
 import {StyleSheet, Platform} from 'react-native';
 import * as defaultStyle from '../../style';
-import {Theme} from '../../types';
+import {Colors} from '../../../../../source/utils/colors'
+import {Font} from '../../../../../source/utils/fonts'
+import {Dimens} from '../../../../../source/utils/dimens'
 
-export default function (theme: Theme = {}) {
+
+const STYLESHEET_ID = 'stylesheet.calendar.header';
+
+ export default function (theme = {}) {
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      paddingLeft: 10,
-      paddingRight: 10,
-      marginTop: 6,
-      alignItems: 'center'
+      // paddingLeft: 10,
+      // paddingRight: 10,
+      // marginTop: 6,
+      width: '103%',
+      marginLeft: -5,
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+      alignItems: 'center',
+      
+      backgroundColor: Colors.theme,
+      height: 40,
     },
     headerContainer: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      
     },
     monthText: {
-      fontSize: appStyle.textMonthFontSize,
-      fontFamily: appStyle.textMonthFontFamily,
-      fontWeight: appStyle.textMonthFontWeight,
-      color: appStyle.monthTextColor,
-      margin: 10
+      fontSize: Dimens.dimen_18,
+      fontFamily: Font.Nunito_Medium,
+      color: Colors.black,
+      margin: 10,
     },
     arrow: {
-      padding: 10,
+      padding: 18,
       ...appStyle.arrowStyle
     },
     arrowImage: {
@@ -40,23 +52,26 @@ export default function (theme: Theme = {}) {
       tintColor: appStyle.disabledArrowColor
     },
     week: {
-      marginTop: 7,
+      height: 40,
       flexDirection: 'row',
-      justifyContent: 'space-around'
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      width: '103%',
+      marginLeft: -5,
+      backgroundColor: Colors.dayName_Background,
     },
     dayHeader: {
-      marginTop: 2,
-      marginBottom: 7,
+      marginTop: 0,
+      marginBottom: 0,
       width: 32,
       textAlign: 'center',
-      fontSize: appStyle.textDayHeaderFontSize,
-      fontFamily: appStyle.textDayHeaderFontFamily,
-      fontWeight: appStyle.textDayHeaderFontWeight,
-      color: appStyle.textSectionTitleColor
+      fontSize: Dimens.dimen_13,
+      fontFamily: Font.Nunito_Bold,
+      color: Colors.black
     },
     disabledDayHeader: {
-      color: appStyle.textSectionTitleDisabledColor
+      color:  appStyle.textSectionTitleDisabledColor
     },
-    ...(theme.stylesheet?.calendar?.header || {})
+    ...(theme[STYLESHEET_ID] || {})
   });
 }
